@@ -6,15 +6,15 @@ import animation
 # création de la classe qui gérera les monstres
 class Monster(animation.AnimateSprite):
 
-    def __init__(self, game):
-        super().__init__("mummy")
+    def __init__(self, game, name, size, offset=0):
+        super().__init__(name, size)
         self.game = game
         self.health = 100
         self.max_health = 100
         self.attack = 0.3
         self.rect = self.image.get_rect()
         self.rect.x = 1000 + random.randint(0, 300)
-        self.rect.y = 540
+        self.rect.y = 540 - offset
         self.velocity = random.uniform(0.1, 1)
         self.start_animation()
 
@@ -67,5 +67,17 @@ class Monster(animation.AnimateSprite):
             # Infliger des dégâts (au joueur)
             self.game.player.damage(self.attack)
 
+# definir une classe pour la momie
+class Mummy(Monster):
+
+    def __init__(self, game):
+        super().__init__(game, 'mummy', (130, 130))
 
 
+# definir une class pour l'alien
+class Alien(Monster):
+
+    def __init__(self, game):
+        super().__init__(game, 'alien', (300, 300), 130)
+        self.health = 250
+        self.max_health = 250
