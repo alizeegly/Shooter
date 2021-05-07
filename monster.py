@@ -15,8 +15,11 @@ class Monster(animation.AnimateSprite):
         self.rect = self.image.get_rect()
         self.rect.x = 1000 + random.randint(0, 300)
         self.rect.y = 540 - offset
-        self.velocity = random.uniform(0.1, 1)
         self.start_animation()
+
+    def set_speed(self, speed):
+        self.default_speed = speed
+        self.velocity = random.uniform(0.1, speed)
 
     def damage(self, amount):
         # infliger des dégats
@@ -25,7 +28,7 @@ class Monster(animation.AnimateSprite):
         if self.health <= 0:
             # le faire réapparaitre comme un nouveau monstre
             self.rect.x = 1000 + random.randint(0, 300)
-            self.velocity = random.uniform(0.1, 1)
+            self.velocity = random.uniform(0.1, self.default_speed)
             self.health = self.max_health
 
             # si la barre d'évenement est à son maximum
@@ -67,11 +70,13 @@ class Monster(animation.AnimateSprite):
             # Infliger des dégâts (au joueur)
             self.game.player.damage(self.attack)
 
+
 # definir une classe pour la momie
 class Mummy(Monster):
 
     def __init__(self, game):
         super().__init__(game, 'mummy', (130, 130))
+        self.set_speed(3)
 
 
 # definir une class pour l'alien
@@ -81,3 +86,5 @@ class Alien(Monster):
         super().__init__(game, 'alien', (300, 300), 130)
         self.health = 250
         self.max_health = 250
+        self.set_speed(1)
+        self.attack = 0.8

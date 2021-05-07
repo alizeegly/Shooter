@@ -7,6 +7,10 @@ pygame.init()
 ############################################# TUTO #############################################
 ###### https://www.youtube.com/watch?v=8J8wWxbAdFg&list=PLMS9Cy4Enq5KsM7GJ4LHnlBQKTQBV8kaR #####
 ################################################################################################
+# définir une clock
+clock = pygame.time.Clock()
+FPS = 80
+
 # générer la fenêtre du jeu
 pygame.display.set_caption("Comet fall Game")
 screen = pygame.display.set_mode((1080, 720))
@@ -69,3 +73,5 @@ while running:
             if play_button_rect.collidepoint(event.pos):
                 # mettre le jeu en mode lancer
                 game.start()
+    # fixer le nb de fps sur la clock
+    clock.tick(FPS)
