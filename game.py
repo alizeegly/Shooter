@@ -5,6 +5,9 @@ from comet_event import CometFallEvent
 
 
 # création de la class Jeu
+from sounds import SoundManager
+
+
 class Game:
 
     def __init__(self):
@@ -18,6 +21,8 @@ class Game:
         self.comet_event = CometFallEvent(self)
         # Groupe de monstres
         self.all_monsters = pygame.sprite.Group()
+        # gérer le son
+        self.sound_manager = SoundManager()
         # mettre le score à zéro
         self.score = 0
         # définition de la font du score
@@ -84,6 +89,7 @@ class Game:
         self.comet_event.reset_percent()
         self.is_playing = False
         self.score = 0
+        self.sound_manager.play("game_over")
 
     def start(self):
         self.is_playing = True
