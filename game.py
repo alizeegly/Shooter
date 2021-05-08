@@ -18,9 +18,17 @@ class Game:
         self.comet_event = CometFallEvent(self)
         # Groupe de monstres
         self.all_monsters = pygame.sprite.Group()
+        # mettre le score à zéro
+        self.score = 0
+        # définition de la font du score
+        self.font = pygame.font.SysFont("monospace", 19, True)
         self.pressed = {}
 
     def update(self, screen):
+        # afficher le score sur l'écran
+        score_text = self.font.render(f"Score : {self.score}", 1, (0, 0, 0))
+        screen.blit(score_text, (20, 20))
+
         # appliquer l'image du joueur
         screen.blit(self.player.image, self.player.rect)
 
@@ -75,9 +83,13 @@ class Game:
         self.player.health = self.player.max_health
         self.comet_event.reset_percent()
         self.is_playing = False
+        self.score = 0
 
     def start(self):
         self.is_playing = True
         self.spawn_monster(Mummy)
         self.spawn_monster(Mummy)
         self.spawn_monster(Alien)
+
+    def add_score(self, points=10):
+        self.score += points
