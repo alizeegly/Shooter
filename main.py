@@ -71,7 +71,7 @@ while running:
                     # mettre le jeu en mode lancer
                     game.start()
                     # jouer le son du bouton
-                    game.sound_manager.play("click") 
+                    game.sound_manager.play("click")
         elif event.type == pygame.KEYUP:
             game.pressed[event.key] = False
         elif event.type == pygame.MOUSEBUTTONDOWN:
