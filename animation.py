@@ -44,7 +44,7 @@ def load_animation_images(sprite_name):
     path = f"assets/{sprite_name}/{sprite_name}"
 
     # boucler sur chaque fichiers / images du dossier
-    for num in range(1, 24):
+    for num in range(2, 24):
         image_path = path + str(num) + ".png"
         images.append(pygame.image.load(image_path))
 
